@@ -1,0 +1,225 @@
+<style>
+  .time {
+    margin-top: 99px;
+  }
+
+  .price {
+    margin-top: 99px;
+    margin-left: 30px;
+  }
+
+  form#paymentFrm .col-lg-6 {
+    width: 70%;
+  }
+
+  .time input {
+    border: 2px solid #cdcdcd;
+    padding: 9px;
+    border-radius: 5px;
+  }
+
+  .price input {
+    border: 2px solid #cdcdcd;
+    padding: 9px;
+    border-radius: 5px;
+  }
+
+  .time p {
+    margin-bottom: 10px;
+  }
+
+  .price p {
+    margin-bottom: 10px;
+  }
+</style>
+{% extends 'accounts/base.html' %} {% block content %} {% load static %}
+<div class="page-wrapper wrapper_page">
+  <div class="page-breadcrumb bg-white white_bg">
+    <div class="row align-items-center">
+      <div class="col-lg-9 col-md-6 6col-sm-4 col-xs-12 mb-3">
+        <h4 class="page-title title_page">Motocornio Services</h4>
+      </div>
+    </div>
+    <div class="dashboardBox">
+      <div class="container-fluid d-flex">
+        <div>
+          <div class="profile-input-box-area">
+            <form class="contact-form-main-area form-time" action="" method="post" id="myid">
+              {% csrf_token %} {% if messages %} {% for message in messages %}
+              <b style="color: #208817; margin-left: 22px">{{message}}</b>
+              {% endfor %} {% endif %}
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="table-data-search-box">
+                    <div class="search link btn-income mt-3">
+                      <a href="{% url 'customer' %}" class="report_link">Create New Customer</a>
+                    </div>
+                  </div>
+                  <label for="customer">Choose Customer</label>
+                  <div class="profile-input-box-area">
+                    <select class="form-control change_border" name="choose_customer" id="customer" required="">
+                      <option value="">Select Customer</option>
+                      {% for customer in customers %}
+                      <option name="choose_customer" id="customer" value="{{customer.id}}">
+                        {{customer}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="service">Choose Service</label>
+                  <div class="profile-input-box-area select-parent">
+                    <select class="form-control change_border" id="service" name="choose_service" id="service"
+                      required="" onchange="serviceID()">
+                      <option value="">Select Service</option>
+                      {% for service in services %}
+                      <option name="choose_service" id="service" value="{{service.id}}">
+                        {{service.name}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="d-flex time-none" id="mid-select">
+                    <div class="timeSer">
+                      <p>
+                        Service Time (in Min)
+                      </p>
+                      <div>
+                        <span type="text" id="times" class="form-control field change_border"
+                          contenteditable="false"></span>
+                      </div>
+                    </div>
+                    <div class="priceSer">
+                      <p>Price of the Service</p>
+                      <div>
+                        <span type="text" id="prices" class="form-control field change_border"
+                          contenteditable="false"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="service">Choose Equipment</label>
+                  <div class="profile-input-box-area">
+                    <select class="form-control change_border" name="choose_equipment" id="equipment" required="">
+                      <option value="">Select Equipment</option>
+                      {% for equipment in equipments %}
+                      <option name="choose_equipment" id="equipment" value="{{equipment.id}}">
+                        {{equipment.name}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Start Time</label>
+                  <input type="datetime-local" class="form-control field change_border" name="start_time"
+                    placeholder="Enter Start Time" autofocus="" required="" id="start_time" onchange="endTime()" />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>End Time</label>
+                  <input type="datetime-local" class="form-control field change_border" name="end_time"
+                    placeholder="Enter End Time" autofocus="" id="end_time" required="" readonly="" />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="payment_method">Payment Method</label>
+                  <select name="payment_method" id="payment_method">
+                    <br />
+                    <option value="Card">Card</option>
+                    <option value="Cash">Cash</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input type="checkbox" id="checkbox" required="" name="checkbox" value="checkbox" />
+                  <label for="checkbox">Check this box, It will create responsive letter for the
+                    service of the customer</label><br />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="contact-form-submint-btn-area">
+                  <button type="submit" class="contact-form-submint-btn btn_submit">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="d-flex" id="time-select">
+          <div class="time">
+            <p>Service Time (in Min)</p>
+            <div>
+              <span type="text" id="time" class="form-control field change_border" contenteditable="false"></span>
+            </div>
+          </div>
+          <div class="price">
+            <p>Price of the Service</p>
+            <div>
+              <span type="text" id="price" class="form-control field change_border" contenteditable="false"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const serviceID = () => {
+    const service = document.getElementById("service").value;
+    console.log(service);
+    $.ajax({
+      method: "GET",
+      url: "/select-service/",
+      data: {
+        service_id: service,
+        //csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (data) {
+        document.getElementById("time").innerHTML = data.time;
+        document.getElementById("price").innerHTML = data.price;
+        document.getElementById("times").innerHTML = data.time;
+        document.getElementById("prices").innerHTML = data.price;
+      },
+    });
+  };
+
+  const endTime = () => {
+    var times = document.getElementById("time").innerHTML;
+    const timeStamp = document.getElementById("start_time").value;
+    console.log(timeStamp);
+    let dt = new Date(timeStamp);
+    dt.setMinutes(dt.getMinutes() + parseInt(times));
+    var final_end_date = dateConverter(dt);
+    //console.log(dt);
+    //console.log(dateConverter(dt));
+    document.getElementById("end_time").value = final_end_date;
+  };
+</script>
+<script>
+  function dateConverter(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    hours = ("0" + date.getHours()).slice(-2);
+    minutes = ("0" + date.getMinutes()).slice(-2);
+    seconds = ("0" + date.getSeconds()).slice(-2);
+    year = date.getFullYear();
+    var dateformat =
+      year + "-" + mnth + "-" + day + "T" + hours + ":" + minutes;
+    return dateformat;
+  }
+</script>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Motocornio Services</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    <div class="row">
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="table-data-search-box">
+                                <div class="search link btn-income mt-3">
+                                    <a href="{% url 'service' %}" class="report_link">Created New Service</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Inventory of Closed Services of Selected Mall</h4>
+                                    </h4>
+                                    <div class="table-responsive">
+                                        {% if page_obj %}
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No</th>
+                                                    <th>Service</th>
+                                                    <th>Customer</th>
+                                                    <th>Mall Assigned</th>
+                                                    <th>Equipment</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for income in page_obj %}
+                                                <tr>
+                                                    <td>
+                                                        {{forloop.counter}}
+                                                    </td>
+                                                    <td>{{income.service}}</td>
+                                                    <td>
+                                                        {{income.customer}}
+                                                    </td>
+                                                    <td>
+                                                        {{income.mall_assigned}}
+                                                    </td>
+                                                    <td>
+                                                        {{income.equipment}}
+                                                    </td>
+                                                    <td>
+                                                        {{income.start_time}}
+                                                    </td>
+                                                    <td>
+                                                        {{income.end_time}}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <nav aria-label="...">
+                                                <ul class="pagination">
+                                                    <li class="page-item">
+                                                        {% if page_obj.has_previous %}
+                                                        <a class="page-link"
+                                                            href="?page={{page_obj.previous_page_number}}">Previous</a>
+                                                        {% endif %}
+                                                    </li>
+                                                    <span class="page-link">{{page_obj.number}}</span>
+                                                    <li class="page-item">
+                                                        {% if page_obj.has_next %}
+                                                        <a class="page-link"
+                                                            href="?page={{page_obj.next_page_number}}">Next</a>
+                                                        {% endif %}
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        {% else %}
+                                        <h3 class="text-center alert alert-warning">No Data Available</h3>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

@@ -1,0 +1,246 @@
+<style>
+    .customer-parent {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    p.cus-num {
+        margin-bottom: -4px;
+        color: #0f95ab;
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    .col-md-3.card-col {
+
+        max-width: 230px;
+        padding-left: unset;
+        padding-right: unset;
+        margin-right: 20px;
+    }
+
+    .col-md-3.card-last {
+        background: #dff0d8;
+        max-width: 230px;
+        padding-left: unset;
+        padding-right: unset;
+
+    }
+
+    .bg-col1 {
+        background: #8b6fc02e;
+    }
+
+    .bg-col2 {
+        background: #e3f53d54;
+    }
+
+    .bg-col3 {
+        background: #facfe89c;
+    }
+
+
+    .customer-icon i {
+        color: #0f95ab;
+        font-size: 55px;
+    }
+
+    .card-bootom {
+        margin-top: 35px;
+        background: #8b6fc0;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    i.bottom-icon {
+        font-size: 18px;
+        color: white;
+        margin-top: 6px;
+    }
+
+    .button-card button {
+        background: unset;
+        border: unset;
+        color: white;
+        font-weight: 500;
+        font-size: 19px;
+        padding: unset;
+        margin: unset;
+    }
+
+    .button-card button:focus {
+        outline: unset;
+    }
+
+    .container-fluid.card-cont {
+        padding-left: unset;
+        padding-right: unset !important;
+        /* margin-right: unset !important; */
+    }
+
+    p.cus-para {
+        font-size: 18px;
+        color: #0f95ab;
+        font-weight: 600;
+    }
+    .row.row-cus {
+    margin-left: -3px;
+}
+</style>
+
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% load admin_menu %}
+
+{% block extrastyle %}
+{{ block.super }}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" /> -->
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="row">
+    <div class="col-sm-6">
+        <h2>{{title}}</h2>
+    </div>
+</div>
+{% endblock %}
+{% endif %}
+
+
+{% block content %}
+<!-- pp home -->
+<section>
+    <div class="container-fluid card-cont">
+        <div class="row mt-5 row-cus">
+            <div class="col-md-3 card-col bg-col1">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i class="fas fa-users"></i></div>
+                    <div class="customer-text">
+                        <p class="cus-para">Customers</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/customers/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-md-3 card-col  bg-col2">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #f33155;" class="fas fa-building"></i>
+                    </div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #f33155;">Malls</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/malls/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 card-col  bg-col3">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #107a4b;" class="fas fa-money-check-alt"></i></div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #107a4b;">Incomes</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/income/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 card-last">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #7e6107" class="fas fa-th-list"></i></div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #7e6107;">Inventories</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/inventory/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <!-- 2nd row -->
+        <div class="row row-cus" style="margin-top: 21px;">
+            <div class="col-md-3 card-col bg-col1" style="background: #cd09632e;">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #a50581;" class="fa fa-user"></i></i></div>
+                    <div class="customer-text">
+                        <p style="color: #a50581;" class="cus-para">Users</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/user/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-md-3 card-col  bg-col2" style="    background: #bbf1e799;">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #0f95ab;" class="far fa-address-card"></i>
+                    </div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #0f95ab;">Responsive Letter</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/responsiveletter/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 card-col  bg-col3" style="background: #fd7e1452;">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #064a99;" class="fa fa-lock"></i></div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #064a99;">Privacy Policy</p>
+                    </div>
+                </div>
+                <a href="/admin/accounts/privacypolicy/">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 card-last" style="background: #b1efa2ad;">
+                <div class="customer-parent">
+                    <div class="customer-icon"><i style="color: #CE5F08" class="fa fa-file"></i></div>
+                    <div class="customer-text">
+                        <p class="cus-para" style="color: #CE5F08;">Reports</p>
+                    </div>
+                </div>
+                <a href="{% url 'service-reports' %}">
+                    <div class="card-bootom">
+                        <div class="button-card"><button>View</button></div>
+                        <div><i class="bottom-icon fas fa-arrow-circle-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

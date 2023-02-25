@@ -1,0 +1,282 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<style>
+    .info {
+        color: green;
+        margin-left: 22px;
+    }
+
+    .error {
+        color: red;
+        margin-left: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+    .form-group label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        border: 2px solid #f0f0f0;
+        border-radius: 4px;
+        display: block;
+        font-family: inherit;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .form-group input:focus {
+        outline: 0;
+        border-color: #777;
+    }
+
+    .form-group.success input {
+        border-color: #2ecc71;
+    }
+
+    .form-group.error input {
+        border-color: #e74c3c;
+    }
+
+    .form-group i {
+        visibility: hidden;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+    }
+
+    .form-group.success i.fa-check-circle {
+        color: #2ecc71;
+        visibility: visible;
+    }
+
+    .form-group.error i.fa-exclamation-circle {
+        color: #e74c3c;
+        visibility: visible;
+    }
+
+    .form-group small {
+        color: #e74c3c;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        visibility: hidden;
+    }
+
+    .form-group.error small {
+        visibility: visible;
+    }
+</style>
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Motocornio Services</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% csrf_token %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <span class="{{message.tags}}">{{message}}</span>
+                    {% endfor %}
+                    {% endif %}
+                    <span type="text" id="message" class="info" contenteditable="false"></span>
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control field change_border" name="name"
+                                    placeholder="Enter Name" autofocus="" id="name">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Surname</label>
+                                <input type="text" class="form-control field change_border" name="surname"
+                                    placeholder="Enter Surname" autofocus="" id="surname">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Cellphone</label>
+                                <input type="text" class="form-control field change_border" name="cellphone"
+                                    placeholder="Enter Cellphone With Country Code" autofocus="" id="cellphone">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" min="0" class="form-control field change_border" name="age"
+                                    placeholder="Enter Age" autofocus="" id="age">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control field change_border" name="email"
+                                    placeholder="Enter Email" autofocus="" id="email">
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        const form = document.getElementById('paymentFrm');
+        const name = document.getElementById('name');
+        const surname = document.getElementById('surname');
+        const age = document.getElementById('age');
+        const email = document.getElementById('email');
+        const cellphone = document.getElementById('cellphone');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            var check_valid = checkInputs();
+            if (check_valid == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'customer' %}",
+                    data: {
+                        name: $('#name').val(),
+                        surname: $('#surname').val(),
+                        age: $('#age').val(),
+                        email: $('#email').val(),
+                        cellphone: $('#cellphone').val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        dataType: "json",
+
+                    },
+                    success: function (data) {
+                        //$('#message').html(data.message)
+                        location.reload();
+                    },
+                    failure: function () {
+                    }
+                });
+            }
+
+        });
+
+        function checkInputs() {
+            const nameValue = name.value.trim();
+            const surnameValue = surname.value.trim();
+            const ageValue = age.value.trim();
+            const emailValue = email.value.trim();
+            const cellphoneValue = cellphone.value.trim();
+
+            var valid = true;
+
+            if (nameValue === '') {
+                setErrorFor(name, 'Name cannot be blank');
+                valid = false;
+            } else if (nameValue.length < 4 || nameValue.length > 16) {
+                setErrorFor(name, 'Name must have 4 to 15 character');
+                valid = false;
+            } else {
+                setSuccessFor(name);
+            }
+
+            if (surnameValue === '') {
+                setErrorFor(surname, 'Surname cannot be blank');
+                valid = false;
+            } else if (surnameValue.length < 4 || nameValue.length > 16) {
+                setErrorFor(surname, 'Surname must have 4 to 15 character');
+                valid = false;
+            } else {
+                setSuccessFor(surname);
+            }
+
+            if (ageValue === '') {
+                setErrorFor(age, 'Age cannot be blank');
+                valid = false;
+            } else if (ageValue.length > 2) {
+                setErrorFor(age, 'Age Can Max 2 Digit');
+                valid = false;
+            } else {
+                setSuccessFor(age);
+            }
+
+
+            if (emailValue === '') {
+                setErrorFor(email, 'Email cannot be blank');
+                valid = false;
+            } else if (!isEmail(emailValue)) {
+                setErrorFor(email, 'Not a valid email');
+                valid = false;
+            } else {
+                setSuccessFor(email);
+            }
+
+
+            if (cellphoneValue === '') {
+                setErrorFor(cellphone, 'Cellphone Number cannot be blank');
+                valid = false;
+            } else if (!isCellPhone(cellphoneValue)) {
+                setErrorFor(cellphone, 'Enter Valid Cellphone With Country Code');
+                valid = false;
+            } else {
+                setSuccessFor(cellphone);
+            }
+
+            return valid;
+        }
+
+        function setErrorFor(input, message) {
+            const formControl = input.parentElement;
+            const small = formControl.querySelector('small');
+            formControl.className = 'form-group error';
+            small.innerText = message;
+        }
+
+        function setSuccessFor(input) {
+            const formControl = input.parentElement;
+            formControl.className = 'form-group success';
+        }
+
+        function isCellPhone(cellphone) {
+            return /^\+([0-9]{1,3})\)?([0-9]{8,12})$/.test(cellphone);
+        }
+        function isEmail(email) {
+            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+        }
+
+    </script>
+    {% endblock content %}

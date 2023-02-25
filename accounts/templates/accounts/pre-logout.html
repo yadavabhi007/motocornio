@@ -1,0 +1,161 @@
+<style>
+    button.contact-form-submint-btn.btn_submit {
+        padding: 7px 30px !important;
+        margin-left: 31px;
+        box-shadow: unset;
+        background: #8b6fc0 !important;
+    }
+
+    .pull-left a {
+        background: #c74b93de;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        border: unset;
+    }
+
+    .contact-form-submint-btn-area {
+        text-align: left !important;
+        padding: unset !important;
+    }
+
+    .butn-parent a:hover {
+        color: white;
+
+    }
+
+    .pull-left a:hover {
+        color: white;
+        background: #8b6fc0;
+
+    }
+
+    .butn-parent {
+        display: flex;
+        margin-left: 23%;
+        margin-top: 20px;
+    }
+
+    .butn-parent a {
+        background: #8b6fc0;
+        padding: 5px 20px;
+        color: white;
+        border-radius: 6px;
+    }
+
+    .but-no {
+        margin-left: 10px;
+    }
+
+    .remarksTitle {
+        padding: 0 30px;
+    }
+
+    .remarksTitle h4 {
+        font-size: 32px;
+    }
+</style>
+
+{% extends 'accounts/base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+    <div class="container-fluid fluid_container responsive_container pt-3 white_bg">
+        <div class="row responsive_row">
+            <div class="col-lg-12">
+            </div>
+            <div class="col-lg-12">
+                <div class="setting-tab-detail-main-area main_area_tab_setting">
+                    <div class="setting-tab-main-area tab_setting_main_area">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active tab-btn link_nav" id="manage-profile-tab"
+                                    data-bs-toggle="tab" data-bs-target="#manage-profile" type="button" role="tab"
+                                    aria-controls="manage-profile" aria-selected="false"><i class="fa fa-user mr-2"
+                                        aria-hidden="true">
+                                    </i><span class="responsive_icon">Today Total Income</span></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="manage-profile" role="tabpanel"
+                            aria-labelledby="manage-profile-tab">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="setting-profile-detail-input-area">
+                                        <form class="contact-form-main-area" id="paymentFrm" method="post">
+                                            {% csrf_token %}
+                                            <div class="row justify-content-evenly mall-center my-5">
+                                                <div class="col-lg-10 ">
+                                                    <div class="remarksTitle">
+                                                        <h4 style="font-size: 25px;">Remarks:</h4>
+                                                        <input style="width: 40%;
+                                                        border: 2px solid rgba(139, 111, 192, 0.51);
+                                                        padding: 4px 20px;
+                                                        margin-top: 10px;
+                                                        border-radius: 4px;
+                                                        height: 65px;" } type="text" id="fname"
+                                                            name="remarkcomment" required=""><br><br>
+                                                    </div>
+                                                    <div class="contact-form-submint-btn-area">
+                                                        <button type="submit"
+                                                            class="contact-form-submint-btn btn_submit">Submit and Logout</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4" style="width: 50%;">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <form class="contact-form-main-area" id="paymentFrm">
+                                            <div class="row justify-content-evenly mall-center my-5">
+                                                <div class="col-lg-4 mall-column">
+                                                    <div class="top-20">
+                                                        <div class="form-group">
+                                                            <label class="form-control">Income By Card</label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="top-20">
+                                                        <div class="form-group">
+                                                            <label class="form-control">Income By Cash</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="top-20">
+                                                        <div class="form-group">
+                                                            <label class="form-control">Total Income</label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <span type="date" class="form-control field change_border"
+                                                                contenteditable="false">{{card_income.service__price__sum}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span type="date" class="form-control field change_border"
+                                                            contenteditable="false">{{cash_income.service__price__sum}}</span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <span type="date" class="form-control field change_border"
+                                                                contenteditable="false">{{total_income.service__price__sum}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

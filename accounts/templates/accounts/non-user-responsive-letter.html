@@ -1,0 +1,94 @@
+{% load jsignature_filters %}
+<!DOCTYPE html>
+{% load static %}
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Motocornio</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'accounts/images/favicon.png' %}">
+    <link href="{% static 'accounts/plugins/bower_components/chartist/dist/chartist.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet"
+        href="{% static 'accounts/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css' %}">
+    <link href="{% static 'accounts/css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/responsive.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="{% static 'js/jquery.slim.min.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+</head>
+
+<body style="font-family: Roboto, sans-serif;">
+    <div class="container-fluid fluid_container responsive_container pt-3 white_bg">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="application-detail-heading-area">
+                    <h2 class="noti_detail">Responsive Letters</h2>
+                </div>
+                <div class="application-detail-heading-area">
+                    <h1 class="noti_detail">CARTA RESPONSIVA MOTOCORNIO</h1>
+                </div>
+                <div class="contact-detail-main-area main_area_contact_detail">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="terms-conditions-detail-area">
+                                <h3>{{responsive_letter.customer}}</h3>
+                                <p>{{responsive_letter.description | linebreaks}}</p>
+                                <p>FECHA: {{responsive_letter.date}}</p>
+                                <p>NOMBRE DEL RESPONSABLE: {{responsive_letter.customer}}</p>
+                                <p>FIRMA DEL RESPONSABLE: {% if responsive_letter.signature %}<img src="{{ responsive_letter.signature|signature_base64 }}" alt="{{ responsive_letter }}" />{% else %} No Image {% endif %}</p>
+                                <a href="{% url 'non-user-responsive-signature' responsive_letter.id %}" class="btn btn-secondary m-2">Signature</a>
+                                <a class="btn btn-primary m-2" href="{% url 'generate-non-user-pdf' responsive_letter.id %}">Generate PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer text-center footer_text"> 2022 © All rights reserved. <a class="footer_link"
+            href="#">Motocornio</a>
+    </footer>
+
+    <script src="{% static 'accounts/plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'accounts/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'accounts/js/app-style-switcher.js' %}"></script>
+    <script src="{% static 'accounts/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'accounts/js/waves.js' %}"></script>
+    <script src="{% static 'accounts/js/sidebarmenu.js' %}"></script>
+    <script src="{% static 'accounts/js/custom.js' %}"></script>
+    <script src="{% static 'accounts/plugins/bower_components/chartist/dist/chartist.min.js' %}"></script>
+    <script
+        src="{% static 'accounts/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static 'accounts/js/pages/dashboards/dashboard1.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="{% static 'accounts/js/chart.js' %}"></script>
+    <script src="{% static 'accounts/js/pie-chart.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.counter-value').each(function () {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 3500,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

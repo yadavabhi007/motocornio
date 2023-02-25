@@ -1,0 +1,218 @@
+<style>
+    aside.main-sidebar.sidebar-dark-primary.elevation-4 {
+        background: white !important;
+    }
+
+    span.menu-title {
+        color: #444 !important;
+        font-size: 17px;
+    }
+    span.brand-text.font-weight-light {
+    color: #8b6fc0;
+    font-weight: 600 !important;
+}
+    .leftside_icon {
+        color: #8b6fc0;
+    }
+    li.nav-header {
+    display: none;
+}
+
+    section.content-header {
+        background: #8b6fc0;
+        color: white;
+        margin-left: 7px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .info a {
+        color: black !important;
+        font-size: 17px !important;
+    }
+
+    li.nav-header {
+        color: black !important;
+        font-size: 17px !important;
+    }
+
+    [class*=sidebar-dark] .brand-link {
+        border-bottom: 1px solid #bdc6cf;
+    }
+
+    [class*=sidebar-dark] .user-panel {
+        border-bottom: 1px solid #bdc6cf;
+    }
+
+    .sub-menu a {
+        color: black !important;
+    }
+
+    i.fas.fa-bars {
+        color: #8b6fc0;
+        font-size: 25px;
+    }
+
+    .elevation-4 {
+        box-shadow: unset !important;
+    }
+
+    .navbar-expand .navbar-nav .nav-link {
+
+        padding-left: 0px;
+    }
+
+    .user-panel.mt-3.pb-3.mb-3.d-flex {
+        display: none !important;
+    }
+    li.nav-item{
+        width: 100%;
+    }
+
+   
+    .sub-menu li.nav-item a:hover {
+    background-color: #8b6fc0 !important;
+}
+    nav#sidebar {
+        padding-left: unset !important;
+        padding-right: unset !important;
+    }
+    li.nav-item:hover {
+        background: #e6e2ef;
+color: white !important;
+        width: 100%;
+    }
+    a.nav-link:hover{
+        background-color: unset !important;
+        color: #ffff !important;
+    }
+    .sidebar {
+        padding-left: unset;
+        padding-right: unset;
+    }
+</style>
+
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+{% load admin_menu %}
+{% load static %}
+
+{% block nav_links %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav myDIV">
+        <li class="nav-item">
+            <a class="nav-link list-togg" href="/admin/" aria-expanded="false"
+                aria-controls="ui-basic">
+                <i class="fas fa-tachometer-alt leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Dashboard</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link list-togg" href="/admin/accounts/customers/" aria-expanded="false"
+                aria-controls="ui-basic">
+                <i class="fas fa-users leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Customers</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/accounts/malls/" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fas fa-building leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white ">Malls</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/accounts/service/" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fab fa-servicestack leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white ">Services</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link list-togg" href="/admin/accounts/income/" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fas fa-money-check-alt leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Incomes</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link list-togg" href="/admin/accounts/inventory/" aria-expanded="false"
+                aria-controls="ui-basic">
+                <i class="fas fa-th-list leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Inventories</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+ 
+        <li class="nav-item ">
+            <a class="nav-link" href="/admin/accounts/user/" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fas fa-solid fa-user leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white ">Users</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#responsive_letter" aria-expanded="false"
+                aria-controls="ui-basic">
+                <i class="fas fa-address-card leftside_icon" aria-hidden="true"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white ">Responsive Letter</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="responsive_letter">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/admin/accounts/responsiveletter/"
+                            style="margin-left: 18px; color:white">Add Letter
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'responsive-letter-list' %}"
+                            style="margin-left: 18px; color:white">Download Letter
+                        </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#privacy_policy" aria-expanded="false"
+                aria-controls="ui-basic">
+                <i class="fas fa-lock leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white ">Privacy Policy</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="privacy_policy">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/admin/accounts/privacypolicy/"
+                            style="margin-left: 18px; color:white">Add Policy
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'privacy-policy' %}"
+                            style="margin-left: 18px; color:white">Download Policy
+                        </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link list-togg" href="{% url 'service-reports' %}" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fas fa-file leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Reports</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link list-togg" href="/admin/accounts/remark/" aria-expanded="false" aria-controls="ui-basic">
+                <i class="fas fa-solid fa-receipt leftside_icon"></i>
+                <span class="menu-title" style="margin-left: 18px; color:white">Remarks</span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<script>
+    var selector = '.nav li';
+
+    $(selector).on('click', function(){
+        $(selector).removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+{% endblock nav_links %}
