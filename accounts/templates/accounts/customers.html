@@ -156,127 +156,127 @@
             </div>
         </div>
     </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const form = document.getElementById('paymentFrm');
+    const name = document.getElementById('name');
+    const surname = document.getElementById('surname');
+    const age = document.getElementById('age');
+    const email = document.getElementById('email');
+    const cellphone = document.getElementById('cellphone');
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        const form = document.getElementById('paymentFrm');
-        const name = document.getElementById('name');
-        const surname = document.getElementById('surname');
-        const age = document.getElementById('age');
-        const email = document.getElementById('email');
-        const cellphone = document.getElementById('cellphone');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
+        var check_valid = checkInputs();
+        if (check_valid == true) {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'customer' %}",
+                data: {
+                    name: $('#name').val(),
+                    surname: $('#surname').val(),
+                    age: $('#age').val(),
+                    email: $('#email').val(),
+                    cellphone: $('#cellphone').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
 
-            var check_valid = checkInputs();
-            if (check_valid == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'customer' %}",
-                    data: {
-                        name: $('#name').val(),
-                        surname: $('#surname').val(),
-                        age: $('#age').val(),
-                        email: $('#email').val(),
-                        cellphone: $('#cellphone').val(),
-                        csrfmiddlewaretoken: '{{ csrf_token }}',
-                        dataType: "json",
-
-                    },
-                    success: function (data) {
-                        //$('#message').html(data.message)
-                        location.reload();
-                    },
-                    failure: function () {
-                    }
-                });
-            }
-
-        });
-
-        function checkInputs() {
-            const nameValue = name.value.trim();
-            const surnameValue = surname.value.trim();
-            const ageValue = age.value.trim();
-            const emailValue = email.value.trim();
-            const cellphoneValue = cellphone.value.trim();
-
-            var valid = true;
-
-            if (nameValue === '') {
-                setErrorFor(name, 'Name cannot be blank');
-                valid = false;
-            } else if (nameValue.length < 4 || nameValue.length > 16) {
-                setErrorFor(name, 'Name must have 4 to 15 character');
-                valid = false;
-            } else {
-                setSuccessFor(name);
-            }
-
-            if (surnameValue === '') {
-                setErrorFor(surname, 'Surname cannot be blank');
-                valid = false;
-            } else if (surnameValue.length < 4 || nameValue.length > 16) {
-                setErrorFor(surname, 'Surname must have 4 to 15 character');
-                valid = false;
-            } else {
-                setSuccessFor(surname);
-            }
-
-            if (ageValue === '') {
-                setErrorFor(age, 'Age cannot be blank');
-                valid = false;
-            } else if (ageValue.length > 2) {
-                setErrorFor(age, 'Age Can Max 2 Digit');
-                valid = false;
-            } else {
-                setSuccessFor(age);
-            }
-
-
-            if (emailValue === '') {
-                setErrorFor(email, 'Email cannot be blank');
-                valid = false;
-            } else if (!isEmail(emailValue)) {
-                setErrorFor(email, 'Not a valid email');
-                valid = false;
-            } else {
-                setSuccessFor(email);
-            }
-
-
-            if (cellphoneValue === '') {
-                setErrorFor(cellphone, 'Cellphone Number cannot be blank');
-                valid = false;
-            } else if (!isCellPhone(cellphoneValue)) {
-                setErrorFor(cellphone, 'Enter Valid Cellphone With Country Code');
-                valid = false;
-            } else {
-                setSuccessFor(cellphone);
-            }
-
-            return valid;
+                },
+                success: function (data) {
+                    //$('#message').html(data.message)
+                    location.reload();
+                },
+                failure: function () {
+                }
+            });
         }
 
-        function setErrorFor(input, message) {
-            const formControl = input.parentElement;
-            const small = formControl.querySelector('small');
-            formControl.className = 'form-group error';
-            small.innerText = message;
+    });
+
+    function checkInputs() {
+        const nameValue = name.value.trim();
+        const surnameValue = surname.value.trim();
+        const ageValue = age.value.trim();
+        const emailValue = email.value.trim();
+        const cellphoneValue = cellphone.value.trim();
+
+        var valid = true;
+
+        if (nameValue === '') {
+            setErrorFor(name, 'Name cannot be blank');
+            valid = false;
+        } else if (nameValue.length < 4 || nameValue.length > 16) {
+            setErrorFor(name, 'Name must have 4 to 15 character');
+            valid = false;
+        } else {
+            setSuccessFor(name);
         }
 
-        function setSuccessFor(input) {
-            const formControl = input.parentElement;
-            formControl.className = 'form-group success';
+        if (surnameValue === '') {
+            setErrorFor(surname, 'Surname cannot be blank');
+            valid = false;
+        } else if (surnameValue.length < 4 || nameValue.length > 16) {
+            setErrorFor(surname, 'Surname must have 4 to 15 character');
+            valid = false;
+        } else {
+            setSuccessFor(surname);
         }
 
-        function isCellPhone(cellphone) {
-            return /^\+([0-9]{1,3})\)?([0-9]{8,12})$/.test(cellphone);
-        }
-        function isEmail(email) {
-            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+        if (ageValue === '') {
+            setErrorFor(age, 'Age cannot be blank');
+            valid = false;
+        } else if (ageValue.length > 2) {
+            setErrorFor(age, 'Age Can Max 2 Digit');
+            valid = false;
+        } else {
+            setSuccessFor(age);
         }
 
-    </script>
-    {% endblock content %}
+
+        if (emailValue === '') {
+            setErrorFor(email, 'Email cannot be blank');
+            valid = false;
+        } else if (!isEmail(emailValue)) {
+            setErrorFor(email, 'Not a valid email');
+            valid = false;
+        } else {
+            setSuccessFor(email);
+        }
+
+
+        if (cellphoneValue === '') {
+            setErrorFor(cellphone, 'Cellphone Number cannot be blank');
+            valid = false;
+        } else if (!isCellPhone(cellphoneValue)) {
+            setErrorFor(cellphone, 'Enter Valid Cellphone With Country Code');
+            valid = false;
+        } else {
+            setSuccessFor(cellphone);
+        }
+
+        return valid;
+    }
+
+    function setErrorFor(input, message) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('small');
+        formControl.className = 'form-group error';
+        small.innerText = message;
+    }
+
+    function setSuccessFor(input) {
+        const formControl = input.parentElement;
+        formControl.className = 'form-group success';
+    }
+
+    function isCellPhone(cellphone) {
+        return /^\+([0-9]{1,3})\)?([0-9]{8,12})$/.test(cellphone);
+    }
+    function isEmail(email) {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+    }
+
+</script>
+{% endblock content %}

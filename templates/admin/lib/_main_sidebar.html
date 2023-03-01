@@ -7,16 +7,19 @@
         color: #444 !important;
         font-size: 17px;
     }
+
     span.brand-text.font-weight-light {
-    color: #8b6fc0;
-    font-weight: 600 !important;
-}
+        color: #8b6fc0;
+        font-weight: 600 !important;
+    }
+
     .leftside_icon {
         color: #8b6fc0;
     }
+
     li.nav-header {
-    display: none;
-}
+        display: none;
+    }
 
     section.content-header {
         background: #8b6fc0;
@@ -65,27 +68,32 @@
     .user-panel.mt-3.pb-3.mb-3.d-flex {
         display: none !important;
     }
-    li.nav-item{
+
+    li.nav-item {
         width: 100%;
     }
 
-   
+
     .sub-menu li.nav-item a:hover {
-    background-color: #8b6fc0 !important;
-}
+        background-color: #8b6fc0 !important;
+    }
+
     nav#sidebar {
         padding-left: unset !important;
         padding-right: unset !important;
     }
+
     li.nav-item:hover {
         background: #e6e2ef;
-color: white !important;
+        color: white !important;
         width: 100%;
     }
-    a.nav-link:hover{
+
+    a.nav-link:hover {
         background-color: unset !important;
         color: #ffff !important;
     }
+
     .sidebar {
         padding-left: unset;
         padding-right: unset;
@@ -102,8 +110,7 @@ color: white !important;
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav myDIV">
         <li class="nav-item">
-            <a class="nav-link list-togg" href="/admin/" aria-expanded="false"
-                aria-controls="ui-basic">
+            <a class="nav-link list-togg" href="/admin/" aria-expanded="false" aria-controls="ui-basic">
                 <i class="fas fa-tachometer-alt leftside_icon"></i>
                 <span class="menu-title" style="margin-left: 18px; color:white">Dashboard</span>
                 <i class="menu-arrow"></i>
@@ -124,7 +131,7 @@ color: white !important;
                 <i class="menu-arrow"></i>
             </a>
         </li>
-        
+
         <li class="nav-item">
             <a class="nav-link" href="/admin/accounts/service/" aria-expanded="false" aria-controls="ui-basic">
                 <i class="fab fa-servicestack leftside_icon"></i>
@@ -147,7 +154,7 @@ color: white !important;
                 <i class="menu-arrow"></i>
             </a>
         </li>
- 
+
         <li class="nav-item ">
             <a class="nav-link" href="/admin/accounts/user/" aria-expanded="false" aria-controls="ui-basic">
                 <i class="fas fa-solid fa-user leftside_icon"></i>
@@ -192,7 +199,8 @@ color: white !important;
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link list-togg" href="{% url 'service-reports' %}" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link list-togg" href="{% url 'service-reports' %}" aria-expanded="false"
+                aria-controls="ui-basic">
                 <i class="fas fa-file leftside_icon"></i>
                 <span class="menu-title" style="margin-left: 18px; color:white">Reports</span>
                 <i class="menu-arrow"></i>
@@ -210,7 +218,7 @@ color: white !important;
 <script>
     var selector = '.nav li';
 
-    $(selector).on('click', function(){
+    $(selector).on('click', function () {
         $(selector).removeClass('active');
         $(this).addClass('active');
     });

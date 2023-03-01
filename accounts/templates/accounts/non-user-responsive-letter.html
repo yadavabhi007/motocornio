@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,9 +46,13 @@
                                 <p>{{responsive_letter.description | linebreaks}}</p>
                                 <p>FECHA: {{responsive_letter.date}}</p>
                                 <p>NOMBRE DEL RESPONSABLE: {{responsive_letter.customer}}</p>
-                                <p>FIRMA DEL RESPONSABLE: {% if responsive_letter.signature %}<img src="{{ responsive_letter.signature|signature_base64 }}" alt="{{ responsive_letter }}" />{% else %} No Image {% endif %}</p>
-                                <a href="{% url 'non-user-responsive-signature' responsive_letter.id %}" class="btn btn-secondary m-2">Signature</a>
-                                <a class="btn btn-primary m-2" href="{% url 'generate-non-user-pdf' responsive_letter.id %}">Generate PDF</a>
+                                <p>FIRMA DEL RESPONSABLE: {% if responsive_letter.signature %}<img
+                                        src="{{ responsive_letter.signature|signature_base64 }}"
+                                        alt="{{ responsive_letter }}" />{% else %} No Image {% endif %}</p>
+                                <a href="{% url 'non-user-responsive-signature' responsive_letter.id %}"
+                                    class="btn btn-secondary m-2">Signature</a>
+                                <a class="btn btn-primary m-2"
+                                    href="{% url 'generate-non-user-pdf' responsive_letter.id %}">Generate PDF</a>
                             </div>
                         </div>
                     </div>

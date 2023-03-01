@@ -174,9 +174,9 @@ class UserLoginView(View):
                     page_object= paginator.get_page(page_number)
                     return render (request, 'accounts/inventory.html', {'page_obj':page_object})
                 messages.success(request, 'Admin Cant Not Login From Here')
-                return redirect ('login')
+                return redirect ('log-in')
             messages.success(request, 'User Does Not Exists')
-            return redirect ('login')
+            return redirect ('log-in')
         return redirect ('started-service-list')
 
 

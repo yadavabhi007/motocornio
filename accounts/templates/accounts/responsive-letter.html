@@ -20,9 +20,13 @@
                                 <p>{{responsive_letter.description | linebreaks}}</p>
                                 <p>FECHA: {{responsive_letter.date}}</p>
                                 <p>NOMBRE DEL RESPONSABLE: {{responsive_letter.customer}}</p>
-                                <p>FIRMA DEL RESPONSABLE: {% if responsive_letter.signature %}<img src="{{ responsive_letter.signature|signature_base64 }}" alt="{{ responsive_letter }}" />{% else %} No Image {% endif %}</p>
-                                <a href="{% url 'user-responsive-signature' responsive_letter.id %}" class="btn btn-secondary m-2">Signature</a>
-                                <a class="btn btn-primary m-2" href="{% url 'generate-user-pdf' responsive_letter.id %}">Generate PDF</a>
+                                <p>FIRMA DEL RESPONSABLE: {% if responsive_letter.signature %}<img
+                                        src="{{ responsive_letter.signature|signature_base64 }}"
+                                        alt="{{ responsive_letter }}" />{% else %} No Image {% endif %}</p>
+                                <a href="{% url 'user-responsive-signature' responsive_letter.id %}"
+                                    class="btn btn-secondary m-2">Signature</a>
+                                <a class="btn btn-primary m-2"
+                                    href="{% url 'generate-user-pdf' responsive_letter.id %}">Generate PDF</a>
                             </div>
                         </div>
                     </div>
@@ -30,4 +34,5 @@
             </div>
         </div>
     </div>
-    {% endblock content %}
+</div>
+{% endblock content %}

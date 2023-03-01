@@ -19,10 +19,11 @@
                    <h2>Privacy & Policy</h2> 
                   </div> -->
               <div class="terms-conditions-detail-area">
-                <h3>Relacionado con los datos personales recabados por DATASIGN SA DE CV(en adelante denominado como “MOTOCORNIO”).</h3><br>
+                <h3>Relacionado con los datos personales recabados por DATASIGN SA DE CV(en adelante denominado como
+                  “MOTOCORNIO”).</h3><br>
                 {% for data in privacy_policy%}
-                 <h3>{{data.heading}}</h3>
-                 {{data.description | linebreaks}}<br>
+                <h3>{{data.heading}}</h3>
+                {{data.description | linebreaks}}<br>
                 {% endfor %}
                 <a class="btn btn-primary m-2" href="{% url 'generate-privacy-pdf' %}">Generate PDF</a>
               </div>
@@ -32,4 +33,5 @@
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}
